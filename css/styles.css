@@ -20,6 +20,12 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
+h2 {
+  color: #373737;
+  font-family: "Gill Sans Book";
+  text-transform: uppercase; 
+}
+  
 /* Constrain content and center */
 .container{
   width:100%;
