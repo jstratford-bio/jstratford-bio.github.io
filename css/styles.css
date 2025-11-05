@@ -1,1 +1,145 @@
 
+/* Base layout + typography */
+:root{
+  --max-width: 950px;
+  --container-padding: 20px;
+  --gap: 28px;
+  --accent: #0b3d91;
+  --type-sans: "Helvetica Neue", Arial, sans-serif;
+  --type-serif: Georgia, "Times New Roman", serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: var(--type-serif);
+  line-height:1.6;
+  color:#222;
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Constrain content and center */
+.container{
+  width:100%;
+  padding: var(--container-padding);
+  max-width: calc(var(--max-width) + var(--container-padding)*2);
+  margin:0 auto;
+}
+
+/* Header */
+.site-header{
+  border-bottom: 1px solid #e6e6e6;
+  padding-top:24px;
+  padding-bottom:18px;
+}
+.site-header h1{
+  margin:0 0 6px 0;
+  font-family:var(--type-serif);
+  font-size: clamp(20px, 4.2vw, 34px);
+}
+.subtitle{
+  margin:0;
+  color:#555;
+  font-family:var(--type-sans);
+  font-size:14px;
+}
+
+/* Main grid: stacked by default */
+.main-grid{
+  display:block;
+  padding-top:28px;
+  padding-bottom:40px;
+}
+
+/* Each entry is a self-contained 'page' */
+.entry{
+  margin-bottom: var(--gap);
+  background: transparent;
+  break-inside: avoid-column;
+  page-break-inside: avoid;
+}
+
+/* Image styling */
+.entry figure{
+  margin:0;
+}
+.entry img{
+  display:block;
+  width:100%;
+  height:auto;
+  max-height:480px;
+  object-fit:cover;
+  border-radius:6px;
+}
+.entry figcaption{
+  font-size:13px;
+  color:#666;
+  margin-top:8px;
+  font-family:var(--type-sans);
+}
+
+/* Text block */
+.entry-body{
+  margin-top:14px;
+}
+.entry-body h2{
+  margin:0 0 8px 0;
+  font-family:var(--type-serif);
+  font-size:20px;
+}
+.entry-body p{
+  margin:0 0 12px 0;
+  color:#2a2a2a;
+  font-size:16px;
+  font-family:var(--type-sans);
+}
+
+/* Footer */
+.site-footer{
+  border-top:1px solid #eee;
+  padding-top:18px;
+  padding-bottom:36px;
+  color:#555;
+  font-size:13px;
+}
+
+/* ---------------------------------------
+   Large screens: show as two-up 'pages'
+   requirement: when screen > 1025px show pairs
+   --------------------------------------- */
+@media (min-width: 1025px){
+  .main-grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* two columns */
+    gap: var(--gap);
+    align-items: start;
+  }
+
+  /* Visual separation so each column looks like a 'page' */
+  .entry{
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+
+  .entry:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  /* Increase image max height on big screens */
+  .entry img{
+    max-height: 420px;
+  }
+}
+
+/* Optional: wider screen tweaks */
+@media (min-width: 1400px){
+  :root{ --max-width: 1200px; }
+  .entry-body h2{ font-size:22px; }
+  .entry-body p{ font-size:17px; }
+}
